@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> dbTest Client</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body onload="init()">
+    <div>
+        <input type="button" value="Read all" onclick="findAll();" />
+    </div>
+    <script>
+        $.ajax(
+            {
+                url: "api/ordini/getAll",
+                type: "GET",
+                contentType: "application/json",
+                data: "",
+                success: function (result) { readResult(result); },
+                error: function (xhr, status, p3, p4) {
+                    var err = "Error " + " " + status + " " + p3;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).message;
+                    alert(err);
+                }
+            });
+    </script>
+</body>
+</html>
