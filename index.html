@@ -6,18 +6,43 @@
     <link rel="stylesheet" type="text/css" href="mystyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-<body onload="init()">
+<body>
     <div>
         <input type="button" value="Read all" onclick="findAll();" />
     </div>
     <script>
-        $.ajax(
-            {
-                url: "api/ordini/getAll",
+        function findAll() {
+            $.ajax(
+                {
+                    url: "api/ordini/GetAllOrders",
+                    type: "GET",
+                    contentType: "application/json",
+                    data: "",
+                    success: function (result) { alert("successo"); },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).message;
+                        alert(err);
+                    }
+                });
+        }
+        
+
+        function findById() {
+            var id = $('#txtId').val();
+            $.ajax({
+                url: "api/OrdiniId/GetCustOrders/" + id,
+                // url: "api/OrdiniId/GetCustOrders?name=" + name, 
+                // se param stringa
                 type: "GET",
                 contentType: "application/json",
                 data: "",
-                success: function (result) { readResult(result); },
+                success: function (result) {
+                    var lst = [];
+                    lst.push(result)
+                    readResult(lst);
+                },
                 error: function (xhr, status, p3, p4) {
                     var err = "Error " + " " + status + " " + p3;
                     if (xhr.responseText && xhr.responseText[0] == "{")
@@ -25,6 +50,7 @@
                     alert(err);
                 }
             });
+        } 
     </script>
 </body>
 </html>

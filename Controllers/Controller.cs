@@ -19,9 +19,20 @@ namespace WebApplication1.Controllers
             string connString;
             List<ordini> lstOrdini = null;
 
-            connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
            
             return JsonConvert.SerializeObject(lstOrdini);
         }
+
+
+        /*[HttpGet]     // in esecuzione solo con un get dal client
+        [ActionName("GetCustOrders")]   // nome del metodo esposto
+        public IHttpActionResult GetCustOrders(int id)
+        {
+            //var user = listOrdini.FirstOrDefault((u) => u.id == id
+            );
+            if (user == null)
+                return NotFound();
+            return Ok(user);
+        }*/
     }
 }
