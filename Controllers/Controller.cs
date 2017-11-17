@@ -9,18 +9,37 @@ using Newtonsoft.Json;
 
 namespace WebApplication1.Controllers
 {
-    public class OrdiniController : ApiController
+    public class ClientiController : ApiController
     {
 
         [HttpGet]                // in esecuzione solo con un get dal client
-        [ActionName("GetAllOrders")]   // nome del metodo esposto nella API
-        public string GetAllOrders()
+        [ActionName("GetAllClients")]   // nome del metodo esposto nella API
+        public string GetAllClients()
         {
-            string connString;
-            List<ordini> lstOrdini = null;
+            string connString, queryText, factory;
+            List<magazzini> lstClients = null;
+            Model m = new Model();
+            connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
+            queryText = "SELECT id, req, mag FROM clienti";
+            factory = "System.Data.SQLite";
+            string s = m.readTableViaF(connString, queryText, factory);
+            return s;
+            //return JsonConvert.SerializeObject(lstClients);
+        }
 
-           
-            return JsonConvert.SerializeObject(lstOrdini);
+        [HttpGet]                // in esecuzione solo con un get dal client
+        [ActionName("GetClient")]   // nome del metodo esposto nella API
+        public string GetClient(int id)
+        {
+            string connString, queryText, factory;
+            List<magazzini> lstClients = null;
+            Model m = new Model();
+            connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
+            queryText = "SELECT id, req, mag FROM clienti WHERE id = " + id;
+            factory = "System.Data.SQLite";
+            string s = m.readTableViaF(connString, queryText, factory);
+            return s;
+            //return JsonConvert.SerializeObject(lstClients);
         }
 
 

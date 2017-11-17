@@ -12,3 +12,11 @@ C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Web.H
 C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Web.Http.WebHost.xml
 C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\EntityFramework.dll
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Data.SQLite.dll
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Data.SQLite.EF6.dll
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Data.SQLite.Linq.dll
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\EntityFramework.xml
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
+C:\Users\lisa.mazzini\Downloads\WebApplication1\WebApplication1\bin\System.Data.SQLite.xml

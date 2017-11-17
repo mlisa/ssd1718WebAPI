@@ -14,8 +14,10 @@ namespace WebApplication1.Models
     
     public partial class clienti
     {
-        public int PK_UID { get; set; }
-        public Nullable<int> id { get; set; }
-        public string nome { get; set; }
+        public int id { get; set; }
+        public int node_id { get; set; }
+        public int req { get; set; }
+        public int mag { get; set; }
+
     }
 }
