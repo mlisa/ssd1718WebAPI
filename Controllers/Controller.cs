@@ -42,6 +42,18 @@ namespace WebApplication1.Controllers
             //return JsonConvert.SerializeObject(lstClients);
         }
 
+        [HttpPost]
+        [ActionName("insertCustomer")]
+        public string insertCustomer(clienti obj)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
+            string factory = "System.Data.SQLite";
+            string queryString = "insert into clienti (id, req, mag) values(";
+            queryString += obj.id + "," + obj.req + ",'" + obj.mag +"')";
+            Model m = new Model();
+            m.execNonQueryViaF(connString, queryString, factory, true);
+            return "Customer inserted";   // oppure dichiararla static
+        }
 
         /*[HttpGet]     // in esecuzione solo con un get dal client
         [ActionName("GetCustOrders")]   // nome del metodo esposto

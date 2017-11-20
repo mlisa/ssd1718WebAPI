@@ -150,6 +150,39 @@ namespace WebApplication1.Models
             return (res + "]").Replace(",]", "]");
         }
 
+        public int execNonQueryViaF(string connString, string queryText, string factory, Boolean boh)
+        {
+            int numRows = 0;
+            List<string> columns = new List<string>();
+            DbProviderFactory dbFactory = null;
+
+            dbFactory = DbProviderFactories.GetFactory(factory);
+
+            using (DbConnection conn = dbFactory.CreateConnection())
+            {
+                try
+                {
+                    conn.ConnectionString = connString;
+                    conn.Open();
+                    IDbCommand com = conn.CreateCommand();
+                    com.CommandText = queryText;
+                    numRows = com.ExecuteNonQuery();
+                
+                    
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    FlushText(this, ex.Message);
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open)
+                        conn.Close();
+                }
+            }
+            return numRows;
+        }
 
         /*public List<ordini> connectEntity(int id)
         {
