@@ -21,7 +21,6 @@ namespace WebApplication1.Controllers
         public string GetAllClients()
         {
             string queryText;
-            List<magazzini> lstClients = null;
             queryText = "SELECT id, req, mag FROM clienti";
             string s = m.readTableViaF(connString, queryText, factory);
             return s;
@@ -33,7 +32,6 @@ namespace WebApplication1.Controllers
         public string GetClient(int id)
         {
             string queryText;
-            List<magazzini> lstClients = null;
             
             queryText = "SELECT id, req, mag FROM clienti WHERE id = " + id;
             
@@ -61,15 +59,20 @@ namespace WebApplication1.Controllers
             return "Customer updated";
         }
 
-        /*[HttpGet]     // in esecuzione solo con un get dal client
-        [ActionName("GetCustOrders")]   // nome del metodo esposto
-        public IHttpActionResult GetCustOrders(int id)
+        [HttpDelete]
+        [ActionName("deleteCustomer")]
+        public string deleteCustomer(int id)
         {
-            //var user = listOrdini.FirstOrDefault((u) => u.id == id
-            );
-            if (user == null)
-                return NotFound();
-            return Ok(user);
-        }*/
+            string queryString = "delete from clienti where id=" + id;
+            m.execNonQueryViaF(connString, queryString, factory);
+            return "Customer deleted";
+        }
+
+        public string getGAPInstance(int id)
+        {
+            string res = "non trovato";
+            
+            return res;
+        }
     }
 }

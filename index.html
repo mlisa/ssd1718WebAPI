@@ -11,7 +11,9 @@
         ID: <input type="text" id="txtId" /> QNT: <input type="text" id="txtNewQuant" /> <input type="button" value="Read one by id" onclick="findById();" />
         <input type="button" value="Add new client" onclick="insertId();" />
         <input type="button" value="Update client" onclick="updateId();" />
+        <input type="button" value="Delete client" onclick="deleteId();" />
         <input type="button" value="Read all" onclick="findAll();" />
+        <input type="button" value="getInstance" onclick="getInstance();" />
 
     </div>
     <script>
@@ -96,7 +98,68 @@
                 );
             };
             $.ajax(options);
-        };
+        }
+
+        function deleteId() {
+            var options = {};
+            options.url = "/api/Clienti/deleteCustomer/" +
+            $("#txtId").val();
+            options.type = "DELETE";
+            options.contentType = "application/json";
+            options.success = function (msg) {
+                alert(msg);
+            };
+            options.error = function (err) {
+                alert(err.statusText
+                );
+            };
+            $.ajax(options);
+        }
+
+        function AjaxHelper(baseUrl)
+        {
+            this._baseUrl = baseUrl;
+            var callWebAPI = function (url, verb, data, callback)
+            {
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function (evt)
+                {
+                    var data = JSON.parse(evt.target.responseText);
+                    callback(data);
+                }
+                xhr.onerror = function ()
+                {  alert("Error while calling Web API");
+                }
+                xhr.open(verb, url);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                if (data == null)
+                    xhr.send();
+                else
+                    xhr.send(JSON.stringify(data));
+            }
+            this.getGAP = function(id, callback)
+            {
+                callWebAPI(this._baseUrl + "/" + id, "GET", null, callback);
+            }
+        }
+
+        function getInstance()
+        {
+            var ajaxHelper = new AjaxHelper("/api/clienti");
+
+            var getGAPCallback = function (res) {
+                alert(res);
+                console.log(res);
+            }
+
+            var actionCallback = function (msg) {
+                alert(msg)
+            }
+
+            let id = $("#txtId").val();
+            console.log(id);
+            ajaxHelper.getGAP("getGAPInstance?id=" + id, getGAPCallback);
+        }
     </script>
 </body>
 </html>
