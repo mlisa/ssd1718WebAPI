@@ -8,8 +8,9 @@
 </head>
 <body>
     <div>
-        <input type="text" id="txtId" /> <input type="text" id="txtNewQuant" /> <input type="button" value="Read one by id" onclick="findById();" />
+        ID: <input type="text" id="txtId" /> QNT: <input type="text" id="txtNewQuant" /> <input type="button" value="Read one by id" onclick="findById();" />
         <input type="button" value="Add new client" onclick="insertId();" />
+        <input type="button" value="Update client" onclick="updateId();" />
         <input type="button" value="Read all" onclick="findAll();" />
 
     </div>
@@ -78,6 +79,24 @@
             };
             $.ajax(options);
         }
+
+        function updateId() {
+            var options = {};
+            options.url = "/api/Clienti/updateCustomer";
+            options.type = "PUT";
+            options.data = JSON.stringify({
+                "id": $("#txtId").val(),
+                "req": $('#txtNewQuant').val()
+            });
+            options.dataType = "json";
+            options.contentType = "application/json";
+            options.success = function (msg) { alert(msg); };
+            options.error = function (err) {
+                alert(err.statusText
+                );
+            };
+            $.ajax(options);
+        };
     </script>
 </body>
 </html>

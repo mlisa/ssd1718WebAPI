@@ -150,10 +150,9 @@ namespace WebApplication1.Models
             return (res + "]").Replace(",]", "]");
         }
 
-        public int execNonQueryViaF(string connString, string queryText, string factory, Boolean boh)
+        public int execNonQueryViaF(string connString, string queryText, string factory)
         {
             int numRows = 0;
-            List<string> columns = new List<string>();
             DbProviderFactory dbFactory = null;
 
             dbFactory = DbProviderFactories.GetFactory(factory);

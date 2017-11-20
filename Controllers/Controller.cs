@@ -11,17 +11,18 @@ namespace WebApplication1.Controllers
 {
     public class ClientiController : ApiController
     {
+        Model m = new Model();
+        string connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
+        string factory = "System.Data.SQLite";
+
 
         [HttpGet]                // in esecuzione solo con un get dal client
         [ActionName("GetAllClients")]   // nome del metodo esposto nella API
         public string GetAllClients()
         {
-            string connString, queryText, factory;
+            string queryText;
             List<magazzini> lstClients = null;
-            Model m = new Model();
-            connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
             queryText = "SELECT id, req, mag FROM clienti";
-            factory = "System.Data.SQLite";
             string s = m.readTableViaF(connString, queryText, factory);
             return s;
             //return JsonConvert.SerializeObject(lstClients);
@@ -31,12 +32,11 @@ namespace WebApplication1.Controllers
         [ActionName("GetClient")]   // nome del metodo esposto nella API
         public string GetClient(int id)
         {
-            string connString, queryText, factory;
+            string queryText;
             List<magazzini> lstClients = null;
-            Model m = new Model();
-            connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
+            
             queryText = "SELECT id, req, mag FROM clienti WHERE id = " + id;
-            factory = "System.Data.SQLite";
+            
             string s = m.readTableViaF(connString, queryText, factory);
             return s;
             //return JsonConvert.SerializeObject(lstClients);
@@ -46,13 +46,19 @@ namespace WebApplication1.Controllers
         [ActionName("insertCustomer")]
         public string insertCustomer(clienti obj)
         {
-            string connString = ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString;
-            string factory = "System.Data.SQLite";
             string queryString = "insert into clienti (id, req, mag) values(";
             queryString += obj.id + "," + obj.req + ",'" + obj.mag +"')";
-            Model m = new Model();
-            m.execNonQueryViaF(connString, queryString, factory, true);
+            m.execNonQueryViaF(connString, queryString, factory);
             return "Customer inserted";   // oppure dichiararla static
+        }
+
+        [HttpPut]
+        [ActionName("updateCustomer")]
+        public string updateCustomer(clienti obj)
+        {
+            string queryString = "update clienti set req = '" + obj.req +"' where id=" + obj.id;
+            m.execNonQueryViaF(connString, queryString, factory);
+            return "Customer updated";
         }
 
         /*[HttpGet]     // in esecuzione solo con un get dal client
