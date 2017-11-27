@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="mystyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="Js/globalVar.js"></script>
+    <script src="Js/loadGAP.js"></script>
 </head>
 <body>
     <div>
@@ -15,13 +16,12 @@
         <input type="button" value="Add new client" onclick="insertId();" />
         <input type="button" value="Update client" onclick="updateId();" />
         <input type="button" value="Delete client" onclick="deleteId();" />
-        <input type="button" value="Read all" onclick="findAll();" />\<br /><br />
+        <input type="button" value="Read all" onclick="findAll();" /><br /><br />
         
         <h2>Optimization</h2> 
-        JSON: <input type="text" id="json" /><br />
-               
+        JSON: <input value="homemade/toy.json" type="text" id="inputRemote" /><br />              
         <input type="button" value="getInstance" onclick="getInstance();" />
-        <input type="button" value="getRemoteInstance" onclick="getRemoteInstance();" />
+        <input type="button" value="getRemoteInstance" onclick="readWithCORS();" />
         <input type="button" value="Constructive" onclick="constructive();" />
         <input type="button" value="Local search" onclick="localSearch();" />
 
