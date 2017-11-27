@@ -5,15 +5,25 @@
     <title> dbTest Client</title>
     <link rel="stylesheet" type="text/css" href="mystyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="Js/globalVar.js"></script>
 </head>
 <body>
     <div>
-        ID: <input type="text" id="txtId" /> QNT: <input type="text" id="txtNewQuant" /> <input type="button" value="Read one by id" onclick="findById();" />
+        <h2>Operation on DB</h2><br />
+        ID: <input type="text" id="txtId" /> QNT: <input type="text" id="txtNewQuant" /> <br />
+        <input type="button" value="Read one by id" onclick="findById();" />
         <input type="button" value="Add new client" onclick="insertId();" />
         <input type="button" value="Update client" onclick="updateId();" />
         <input type="button" value="Delete client" onclick="deleteId();" />
-        <input type="button" value="Read all" onclick="findAll();" />
+        <input type="button" value="Read all" onclick="findAll();" />\<br /><br />
+        
+        <h2>Optimization</h2> 
+        JSON: <input type="text" id="json" /><br />
+               
         <input type="button" value="getInstance" onclick="getInstance();" />
+        <input type="button" value="getRemoteInstance" onclick="getRemoteInstance();" />
+        <input type="button" value="Constructive" onclick="constructive();" />
+        <input type="button" value="Local search" onclick="localSearch();" />
 
     </div>
     <script>

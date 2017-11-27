@@ -97,6 +97,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="Js\globalVar.js" />
+    <Content Include="Js\loadGAP.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
