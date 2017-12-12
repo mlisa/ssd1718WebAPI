@@ -23,6 +23,7 @@
         <input type="button" value="getInstance" onclick="getInstance();" />
         <input type="button" value="getRemoteInstance" onclick="readWithCORS();" />
         <input type="button" value="Constructive" onclick="constructive();" />
+        <input type="button" value="1-0" onclick="runOnezero();" />
         <input type="button" value="Local search" onclick="localSearch();" />
 
     </div>
@@ -169,6 +170,81 @@
             let id = $("#txtId").val();
             console.log(id);
             ajaxHelper.getGAP("getGAPInstance?id=" + id, getGAPCallback);
+        }
+
+        function constructive() {
+
+            var dist = new Array(m);
+            var capLeft = new Array(m);
+            sol = new Array(n)
+            var cost = 0
+            var capLeft = cap.slice();
+            for (i = 0; i < m; i++) {
+                dist[i] = new Array(2);
+            }
+            for (j = 0; j < n; j++) {
+                for (i = 0; i < m; i++) {
+                    dist[i][0] = req[i][j];
+                    dist[i][1] = i;
+                }
+                dist.sort(function (a, b) { return a[0] - b[0] });
+                for (ii = 0; ii < m; ii++) {
+                    i = dist[ii][1];
+                    if (capLeft[i] >= req[i][j]) {
+                        capLeft[i] -= req[i][j]
+                        sol[j] = i
+                        cost += c[i][j]
+                        break;
+                    }
+                    if (ii == m - 1) {
+                        alert("non sono riuscito ad assegnare")
+                    }
+                }
+            }
+            
+            var zcheck = checkSol(sol);
+            console.log("Cost " + cost + " zcheck " + zcheck + " sol " + sol);
+            zub = cost;
+            solbest = sol;
+            console.log("Constructive, zub=" + zub);
+            alert("Constructive, zub=" + zub);
+            console.log(sol);
+
+        }
+        function runOnezero() {
+            var z = onezero(c);
+            var zcheck = checkSol(sol)
+            console.log("zub " + z + " check " + zcheck + " sol " + sol)
+        }
+        function onezero(cost) {
+            constructive()
+
+            var capLeft = cap.slice()
+            for (j = 0; j < n; j++) {
+                capLeft[sol[j]] -= req[sol[j]][j]
+            }
+
+            var isImproved = false
+
+            do {
+                isImproved = false
+                for (j = 0; j < n; j++) {
+                    for (i = 0; i < m; i++) {
+                        if (cost[i][j] < cost[sol[j]][j] && capLeft[i] > req[sol[j]][j]) {
+                            capLeft[sol[j]] += req[sol[j]][j];
+                            capLeft[i] -= req[i][j];
+                            z -= cost[sol[j]][j];
+                            sol[j] = i;
+                            z += cost[sol[j]][j];
+                            console.log("opt10, improvement. z=" + zub);
+                            isImproved = true;
+                            break;
+                        }
+                    }
+                    if (isImproved) break;
+                }
+            } while (isImproved);
+            return zub
         }
     </script>
 </body>
